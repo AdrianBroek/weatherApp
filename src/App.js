@@ -1,9 +1,15 @@
+import React from "react";
 import GetWeather from './components/GetWeather'
+import OutputData from './components/OutputData'
+import { StateProvider } from './components/StateContext';
 
 function App() {
   return (
     <div>
-      <GetWeather />
+      <StateProvider>
+        <GetWeather />
+        <OutputData />
+      </StateProvider>
     </div>
   );
 }
