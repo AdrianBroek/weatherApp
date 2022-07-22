@@ -14,7 +14,7 @@ const GetWeather = () => {
         })
         .catch(er => new Error(er))
         .then((er) => {
-            alert(er)
+            // alert(er)
         })
     }, [city])
 }
