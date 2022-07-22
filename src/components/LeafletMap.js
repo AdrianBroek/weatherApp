@@ -1,12 +1,18 @@
-import React from "react";
+import React,{useContext, useEffect,useState} from 'react'
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet'
 import styled from "styled-components";
+import StateContext from './StateContext';
+
 
 const Map = () => {
-    
+    const { lat, lon } = useContext(StateContext)
+
+
     return (
         <>
-        <MapContainer style={{height: '380px'}} center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+        {lat && lon &&(
+
+        <MapContainer style={{height: '380px'}} center={[lon, lat]} zoom={13} scrollWheelZoom={false}>
         <TileLayer
             attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -17,6 +23,8 @@ const Map = () => {
             </Popup>
         </Marker>
         </MapContainer>
+        )}
+
         </>
     )
 }
