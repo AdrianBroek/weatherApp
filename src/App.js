@@ -1,15 +1,13 @@
 import React, { useState } from "react";
 import GetWeather from './components/GetWeather'
 import OutputData from './components/OutputData'
-import Map from './components/LeafletMap'
+import SearchInput from './components/SearchInput'
 import { StateProvider } from './components/StateContext';
 // global styles
 import GlobalStyles from './components/GlobalStyles';
 
 
 function App() {
-
-  const [load, setLoad] = useState()
 
   // useEffect(()=> {
   //   return (
@@ -22,8 +20,8 @@ function App() {
       <GlobalStyles />
       <StateProvider>
         <GetWeather />
+        <SearchInput />
         <OutputData />
-        <Map/>
       </StateProvider>
 
     </div>

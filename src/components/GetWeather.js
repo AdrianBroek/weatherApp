@@ -28,7 +28,7 @@ const GetWeather = () => {
     useEffect(() => {
         axios.get(`https://api.weatherapi.com/v1/forecast.json?key=${api_key}&q=${city}&days=7&aqi=no&alerts=no`)
         .then(data => {
-            console.log(data)
+            // console.log(data)
             setCurrent(data.data.current)
             setLocation(data.data.location)
             setForecast(data.data.forecast)

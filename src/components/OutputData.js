@@ -1,4 +1,6 @@
 import React,{useContext, useEffect,useState} from 'react'
+import MapComp from './LeafletMap'
+
 import StateContext from './StateContext';
 
 
@@ -22,17 +24,7 @@ const OutputData = () => {
         setAstro,
         loaded  
     } = useContext(StateContext)
-
-    const inputValue = (e) => {
-        setText(e.target.value)
-    } 
-
-    const handleKeyDown = (e) => {
-        if (e.key === 'Enter') {
-            setCity(text)
-        }
-    }
- 
+    const coords = [lon, lat]
     return (
         <>
         <h1>Pogoda </h1>
@@ -49,11 +41,10 @@ const OutputData = () => {
                 <h3> Wind: {current.wind_kph}</h3>
                 <h3> Promienie UV: {current.uv}</h3>
                 <p><img src={current.condition.icon}/>{current.condition.text}</p>
-
+            
             </div>
         )}
-        <input onKeyDown={handleKeyDown} onChange={inputValue} type="text" />
-        <button onClick={()=> setCity(text)}></button>
+        <MapComp center={coords} zoom={10}/>
     </>
     )
 }
