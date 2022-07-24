@@ -12,7 +12,7 @@ function ChangeView({ center, zoom }) {
 function Map({ center, zoom }) {
   return (
     <div className="map">
-      <MapContainer center={center} zoom={zoom} scrollWheelZoom={false}>
+      <MapContainer dragging={false} center={center} zoom={zoom} scrollWheelZoom={false}>
         <ChangeView center={center} zoom={zoom} /> 
         <TileLayer
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
