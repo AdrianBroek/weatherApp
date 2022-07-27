@@ -6,6 +6,8 @@ import StateContext from './StateContext'
 const GetWeather = () => {
 
     const { 
+        totalData,
+        setTotalData,
         current, 
         setCurrent,
         forecast,
@@ -21,14 +23,13 @@ const GetWeather = () => {
         api_key,
         astro,
         setAstro,
-        setLoaded
+        setLoaded,
     } = useContext(StateContext)
 
 
     useEffect(() => {
         axios.get(`https://api.weatherapi.com/v1/forecast.json?key=${api_key}&q=${city}&days=7&aqi=no&alerts=no`)
         .then(data => {
-            // console.log(data)
             setCurrent(data.data.current)
             setLocation(data.data.location)
             setForecast(data.data.forecast)

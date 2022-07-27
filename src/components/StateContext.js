@@ -13,8 +13,23 @@ export function StateProvider({children}){
     const api_key = process.env.REACT_APP_API_KEY
     const [astro, setAstro] = useState('')
 
+
+    // info about clicked day_hour
+    const [activeindex, setActiveindex] = useState(0)
+
+    // table index
+    const [activeIndexTable, setActiveIndexTable] = useState(0)
+
+    // total data from hours to kokpit
+    const [totalData, setTotalData] = useState()
+
+
     return (
         <StateContext.Provider value={{
+            totalData,
+            setTotalData,
+            activeIndexTable,
+            setActiveIndexTable,
             loaded,
             setLoaded,
             current, 
@@ -31,7 +46,9 @@ export function StateProvider({children}){
             setLon,
             api_key,
             astro,
-            setAstro
+            setAstro,
+            activeindex,
+            setActiveindex
         }}>
             {children}
         </StateContext.Provider>

@@ -5,27 +5,33 @@ import SearchInput from './components/SearchInput'
 import { StateProvider } from './components/StateContext';
 // global styles
 import GlobalStyles from './components/GlobalStyles';
+// style
+import styled from "styled-components";
 
 
 function App() {
 
-  // useEffect(()=> {
-  //   return (
-  //       <h2>siema</h2>
-  //   )
-  // },[lat])
-
   return (
-    <div>
+    <Container>
       <GlobalStyles />
       <StateProvider>
         <GetWeather />
         <SearchInput />
         <OutputData />
       </StateProvider>
-
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.article`
+  padding: 16rem 3rem 3rem 3rem;
+  width: 100%;
+  /* @media screen and (max-width: 767px){
+    width: 80%;
+  }
+  @media screen and (max-width: 550px){
+    width: 90%;
+  } */
+`
 
 export default App;
