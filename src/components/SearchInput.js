@@ -1,4 +1,5 @@
 import React,{useContext, useEffect,useState} from 'react'
+import {unstable_batchedUpdates} from 'react-dom'
 import StateContext from './StateContext';
 import axios from 'axios'
 // icons
@@ -9,7 +10,7 @@ import styled from 'styled-components';
 
 const SearchInput = () => {
 
-    const [text, setText] = useState()
+    const [text, setText] = useState('')
     const [searchresult, setSearchresult] = useState()
 
     const { 
@@ -42,27 +43,31 @@ const SearchInput = () => {
     },[text])
 
 
-
+    // handles input value
     const changeTxt = (e) => {
         setText(e.target.value)
-
     }
-    // console.log(text)
 
-    const searchValue = (e) => {
+    // change input value to picked city text
+    const searchValue = (e) => unstable_batchedUpdates(() => {
         setCity(e.target.innerText)
-        setSearchresult(false)
-    }
+        setText(e.target.innerText)
+        // timeout cause of state bugging 
+        // (i tried couple of things from the internet but failed, 
+        // so i comed up with this, and it kinda works)
+        setTimeout(()=>{
+            setSearchresult(false)
+        },[100])
+    })
 
+    // for enter/escape key submitting
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
             setCity(text)
             setSearchresult(false)
-        }
-        // else {
-        //     console.log(e.key)
-        // }
-        
+        } else if (e.key === 'Escape') {
+            setSearchresult(false)
+        }  
     }
 
     const btnHandler = () => {
@@ -72,14 +77,14 @@ const SearchInput = () => {
 
     return (
         <SearchBar>
-            <input value={city ? city : text} placeholder='Insert city name' onKeyDown={handleKeyDown} onChange={changeTxt} />
+            <input value={text} placeholder='Insert city name' onKeyDown={handleKeyDown} onChange={changeTxt} />
             <button onClick={()=> btnHandler()}>
             <FontAwesomeIcon icon={faSearchLocation} />
             </button>
             <SearchResults>
                  {searchresult && (
-                    searchresult.map((item) => (
-                        <h5 onClick={(e) => searchValue(e)}>{item.name}</h5>
+                    searchresult.map((item, ind) => (
+                        <h5 key={ind} onClick={(e) => searchValue(e)}>{item.name}</h5>
                     ))
                 )}
             </SearchResults>

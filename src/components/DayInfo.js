@@ -1,4 +1,4 @@
-import React, {useContext, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 
 import StateContext from './StateContext';
 
@@ -17,76 +17,54 @@ const DayInfo = ({date, astro, day, hour, index}) => {
     const [hourData, setHourData] = useState(hour[0])
     const [slideValue, setSlideValue] = useState(0)
 
-    // console.log(hour)
-
-
-    function getDayName(dateStr, locale)
-    {
+    const getDayName = (dateStr, locale) => {
         var date = new Date(dateStr);
         return date.toLocaleDateString(locale, { weekday: 'long' });        
     }
 
-    var dateStr = '05/23/2014';
+    var dateStr = '05-232014';
     var day = getDayName(dateStr, "nl-NL"); // Gives back 'Vrijdag' which is Dutch for Friday.
 
-    const handleChange = (e) => {
-        setHourData(hour[e.target.value])
-        if (index == 0){
-
-        }else {}
-        setSlideValue(e.target.value)
-    }
-
-    const dayHandler = (ind) => {
+    const dayHandler = (ind, dateStr, locale) => {
         if ( ind == 0) {
-            return 'Today'
+            return getDayName(dateStr, locale) + '(' + 'Today' + ')'
         } else if (ind == 1){
-            return 'Tommorow'
+            return getDayName(dateStr, locale)
         }else {
-            return 'After tomorrow'
+            return getDayName(dateStr, locale)
         }
     }
 
+    // update data from active forecast day to output data panel
     const updateData = () => {
         setActiveindex(index)
-        setTotalData(hourData)
+        if (index == 0) {
+            setTotalData(hourData[hours])
+        }else {
+            setTotalData(hourData)
+        }
     }
+    
+    let timestamp = new Date();
+    let hours = timestamp.getHours()
+    let minutes = timestamp.getMinutes()
+    
+    // console.log(forecast)
     return (
         <DayInfoContainer className={activeindex == index ? 'active' : ''}
         onClick={()=>updateData()}>
-        <div >
-
+        <div>
             {hourData && (
                 <>
-                <h2>{dayHandler(index)}</h2>
+                <h2>{dayHandler(index, hourData.time.substring(0, hourData.time.indexOf(' ')),"en-US")}</h2>
                 <div>
                     Date: {hourData.time.substring(0, hourData.time.indexOf(' '))}
                 </div>
-                <h2>By hour:</h2>
-                <input type='range' value={slideValue} min="0" max="23" onChange={handleChange}/>
-                <div>
-                    Time: {hourData.time.substring(11)}
-                </div>
-                <div>
-                    Temperature in C:{hourData.temp_c}
-                    <br />
-                    Temperature in F:{hourData.temp_f}
-                </div>
-                <div>
-                    feelslike in C:{hourData.feelslike_c}
-                    <br />
-                    feelslike in F:{hourData.feelslike_f}
-                </div>
-                <div>
-                    feelslike in C:{hourData.feelslike_c}
-                    <br />
-                    feelslike in F:{hourData.feelslike_f}
-                </div>
                 <div className="cloudy">
-                    <h3>Cloud: {hourData.cloud}% </h3>
+                    <h2>{forecast.forecastday[index].day.avgtemp_c}C°</h2>
                     <div className="cloudyItems">
-                        <h3>{hourData.condition.text}</h3>
-                        <img src={hourData.condition.icon} />
+                        <img src={forecast.forecastday[index].day.condition.icon} />
+                        {forecast.forecastday[index].day.condition.text}
                     </div>
                 </div>
                 </>
@@ -101,7 +79,11 @@ const DayInfoContainer = styled.section`
     padding: 1rem;
     border-radius: .5rem;
     grid-row: 2;
+    cursor: pointer;
     .cloudy {
+        span {
+            font-size: .95rem;
+        }
         .cloudyItems {
             display: flex;
             justify-content: flex-start;
@@ -111,7 +93,7 @@ const DayInfoContainer = styled.section`
       background-color: #e15d44;
       color: #fff;
       border: none;
-      box-shadow: 1px 3px 6px rgba(255,255,255, .5) 
+      box-shadow: 1px 3px 6px rgba(255,255,255, .15) 
     }
 `
 

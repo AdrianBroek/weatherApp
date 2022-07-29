@@ -26,12 +26,12 @@ function App() {
 const Container = styled.article`
   padding: 16rem 3rem 3rem 3rem;
   width: 100%;
-  /* @media screen and (max-width: 767px){
-    width: 80%;
+  @media screen and (max-width: 767px) {
+    padding: 16rem 2rem 3rem 2rem;
   }
-  @media screen and (max-width: 550px){
-    width: 90%;
-  } */
+  @media screen and (max-width: 500px) {
+    padding: 16rem .75rem 3rem .75rem;
+  }
 `
 
 export default App;

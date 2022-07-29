@@ -1,4 +1,4 @@
-import React,{useContext, useEffect,useState} from 'react'
+import React,{useContext, useEffect,useState, useLayoutEffect, useRef} from 'react'
 import MapComp from './LeafletMap'
 import DayInfo from './DayInfo'
 import styled from 'styled-components';
@@ -7,6 +7,7 @@ import Slider from './Slider'
 
 
 const OutputData = () => {
+    const ref = useRef(null);
     const [text, setText] = useState([])
     const { 
         setTotalData,
@@ -33,15 +34,37 @@ const OutputData = () => {
     } = useContext(StateContext)
 
 
+    const [width, setWidth] = useState(0);
+    const [height, setHeight] = useState(0);
+
+    useLayoutEffect(() => {
+        setWidth(ref.current.clientWidth);
+        // setHeight(ref.current.offsetHeight);
+    }, []);
+
     const coords = [lon, lat]
 
     // index nastepnych dni pogody
-    console.log(activeindex)
+
     // indeks tabelek
     // console.log(activeIndexTable)
     // wszystkie godziny data
     // console.log(totalData)
 
+    const [leftPos, setleftPos] = useState(0)
+
+    useEffect(()=>{
+        if (activeindex == 0 ) {
+            setleftPos(0);
+        }else if(activeindex == 1) {
+            setleftPos('-'+width+'px')
+
+        }else {
+            setleftPos('-'+width*2+'px')
+        }
+    }, [activeindex])
+
+    // console.log(leftPos)
     return (
         <>
         <h1 style={{
@@ -73,8 +96,13 @@ const OutputData = () => {
             </CurrentInfo>
         )}
 
-        <h1>By hour:</h1>
-        <SliderContainer>      
+
+        <SliderContainer
+        className={loaded ? 'active' : ''}
+        ref={ref}>
+        <div
+        style={{left: leftPos, transition: '.35s ease-out'}}
+        className='parent'>    
         {loaded && forecast.forecastday.map((item,index)=> (
             <Slider 
             astro={item.astro}
@@ -84,8 +112,10 @@ const OutputData = () => {
             days={forecast.forecastday}
             index={index}
             key={index}
+            width={width}
             />
         ))}
+        </div> 
         </SliderContainer>
 
         <DayInfoContainer>
@@ -117,6 +147,7 @@ const CurrentInfo = styled.section`
             font-size: .95rem;
         }
     }
+
     .condition {
         display: flex;
         align-items: center;
@@ -127,17 +158,29 @@ const DayInfoContainer = styled.article`
     display: grid;
     justify-content: space-between;
     grid-template-columns: repeat(auto-fill, 32%);
+    margin: 2rem 0;
 `
 
 const SliderContainer = styled.article`
     display: flex;
     width: 100%;
     height: auto;
-    position: relative;
-    min-height: 250px;
     background: #f0f8ff08;
     border-top-left-radius: 2.5rem;
     border-top-right-radius: 2.5rem;
+    overflow: hidden;
+    position: relative;
+    &.active {
+        min-height: 250px;
+    }
+    .parent {
+
+        display: flex;
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+    }
 `   
 
 const More = styled.section`
