@@ -27,7 +27,7 @@ const DayInfo = ({date, astro, day, hour, index}) => {
 
     const dayHandler = (ind, dateStr, locale) => {
         if ( ind == 0) {
-            return getDayName(dateStr, locale) + '(' + 'Today' + ')'
+            return getDayName(dateStr, locale) + ' (' + 'Today' + ')'
         } else if (ind == 1){
             return getDayName(dateStr, locale)
         }else {

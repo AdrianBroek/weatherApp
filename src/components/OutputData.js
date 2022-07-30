@@ -4,9 +4,12 @@ import DayInfo from './DayInfo'
 import styled from 'styled-components';
 import StateContext from './StateContext';
 import Slider from './Slider'
+import More from './More';
+import {AnimateSharedLayout} from 'framer-motion'
 
 
 const OutputData = () => {
+    const [toggle, setToggle] = useState(false)
     const ref = useRef(null);
     const [text, setText] = useState([])
     const { 
@@ -89,11 +92,25 @@ const OutputData = () => {
                     <img src={totalData ? totalData.condition.icon : current.condition.icon} />
                     </div>
                 </div>
-                <More>
-                    <h3>More</h3>
-                    <div className='line'></div>
-                </More>
             </CurrentInfo>
+        )}
+
+        {totalData && (
+                <MoreSection>
+                <h2 onClick={() => setToggle(!toggle)}>More</h2>
+                <AnimateSharedLayout>
+                    <More className='details' toggle={toggle} setToggle={setToggle}>
+                        <div>Chance of rain: {totalData.chance_of_rain} </div>
+                        <div>Cloud: {totalData.cloud}% </div>
+                        <div>Feels like temp: {totalData.feelslike_c} </div>
+                        <div>Gust : {totalData.gust_kph} </div>
+                        <div>Humidity : {totalData.humidity} </div>
+                        <div>UV : {totalData.uv} </div>
+                        <div>Wind direction : {totalData.wind_dir} </div>
+                    </More>
+                </AnimateSharedLayout>
+                <div className='line'></div>
+            </MoreSection>
         )}
 
 
@@ -154,6 +171,37 @@ const CurrentInfo = styled.section`
     }
 `
 
+const MoreSection = styled.section`
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row: 2;
+    .details {
+        grid-template-columns: repeat(auto-fill, [col-start] 250px [col-end]);
+        display: grid;
+        align-items: center;
+        justify-content: center;
+        div {
+            padding: 1rem;
+        }
+    }
+    h2 {
+        cursor: pointer;
+        text-align: center;
+        -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+    }
+    .line {
+        background: #e15d44;
+        height: 1px;
+        margin: 2rem 0;
+        width: 100%;
+    }
+`
+
 const DayInfoContainer = styled.article`
     display: grid;
     justify-content: space-between;
@@ -174,7 +222,6 @@ const SliderContainer = styled.article`
         min-height: 250px;
     }
     .parent {
-
         display: flex;
         position: absolute;
         left: 0;
@@ -183,19 +230,5 @@ const SliderContainer = styled.article`
     }
 `   
 
-const More = styled.section`
-        grid-column-start: 1;
-        grid-column-end: 3;
-        h3 {
-            text-align: center;
-        }
-    .line {
-        width: 100%;
-        height: 2px;
-        border-radius: .25rem;
-        background-color: RGB(225, 93, 68);
-
-    }
-`
 
 export default OutputData

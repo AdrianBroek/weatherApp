@@ -69,7 +69,7 @@ const SearchInput = () => {
             setSearchresult(false)
         }  
     }
-
+    console.log(searchresult)
     const btnHandler = () => {
         setCity(text)
         setSearchresult(false)
@@ -113,7 +113,6 @@ const SearchBar = styled.section`
         background-color: transparent;
         padding: 0;
         cursor: pointer;
-
         &:hover {
             background-color: transparent;
         }

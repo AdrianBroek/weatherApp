@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const HourSquare = ({el, id, temperature}) => {
-    console.log(id % 2)
+    // console.log(id % 2)
     return (
         <HourSquareStyle 
         style={{height: temperature*5}}
