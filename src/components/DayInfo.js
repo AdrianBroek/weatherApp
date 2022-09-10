@@ -2,6 +2,11 @@ import React, {useContext, useEffect, useState} from "react";
 
 import StateContext from './StateContext';
 
+
+import sunWeather from '../images/sunweather.jpg'
+import rain from '../images/rain.jpg'
+
+import s from '../images/s.jpg'
 // style
 import styled from "styled-components";
 
@@ -49,7 +54,8 @@ const DayInfo = ({date, astro, day, hour, index}) => {
     let hours = timestamp.getHours()
     let minutes = timestamp.getMinutes()
     
-    // console.log(forecast)
+    document.body.style.backgroundImage = `url('${s}')`;
+    console.log(forecast)
     return (
         <DayInfoContainer className={activeindex == index ? 'active' : ''}
         onClick={()=>updateData()}>
@@ -75,11 +81,17 @@ const DayInfo = ({date, astro, day, hour, index}) => {
 }
 
 const DayInfoContainer = styled.section`
-    border: 2px solid;
+    border: 1px solid transparent;
     padding: 1rem;
     border-radius: .5rem;
     grid-row: 2;
     cursor: pointer;
+    /* From https://css.glass */
+    background: rgba(0,0,0,.4);
+    border-radius: 16px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+    backdrop-filter: blur(12.1px);
+    -webkit-backdrop-filter: blur(12.1px);
     .cloudy {
         span {
             font-size: .95rem;
@@ -90,10 +102,7 @@ const DayInfoContainer = styled.section`
         }
     }
     &.active {
-      background-color: #e15d44;
-      color: #fff;
-      border: none;
-      box-shadow: 1px 3px 6px rgba(255,255,255, .15) 
+        border: 1px solid rgba(255, 255, 255, 0.3);
     }
 `
 

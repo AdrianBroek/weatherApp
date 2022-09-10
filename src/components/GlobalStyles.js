@@ -9,7 +9,14 @@ const GlobalStyles = createGlobalStyle`
     }
     body {
         background-color: #0e203c;
-        color: RGB(225, 93, 68);
+        /* color: RGB(225, 93, 68); */
+        color: #fff;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-origin: content-box;
+        -webkit-transition: background-image 0.2s ease-in-out;
+        transition: background-image 0.2s ease-in-out;
     }
     .map {
         position: absolute;
