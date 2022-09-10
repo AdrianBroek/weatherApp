@@ -16,14 +16,14 @@ const HourSquare = ({el, id, temperature}) => {
 
 const HourSquareStyle = styled.div`
     width: 100%;
-    background-color: RGBA(225,93,68, 0.2);
-    border-top: 1px dashed RGB(225,93,68);
+    background-color: #8f70d154;
+    border-top: 1px dashed #8f70d1;
     height: 20px;
     text-align: center;
     cursor: pointer;
     position: relative;
     &:hover {
-            background: RGB(225,93,68);
+            background: #8f70d1;
         }
     p {
         color: white;

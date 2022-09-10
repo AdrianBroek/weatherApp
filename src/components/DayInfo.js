@@ -54,7 +54,7 @@ const DayInfo = ({date, astro, day, hour, index}) => {
     let hours = timestamp.getHours()
     let minutes = timestamp.getMinutes()
     
-    document.body.style.backgroundImage = `url('${s}')`;
+    // document.body.style.backgroundImage = `url('${s}')`;
     console.log(forecast)
     return (
         <DayInfoContainer className={activeindex == index ? 'active' : ''}

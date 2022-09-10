@@ -24,13 +24,15 @@ function App() {
 }
 
 const Container = styled.article`
-  padding: 16rem 3rem 3rem 3rem;
+  padding: 3rem 3rem 3rem 3rem;
   width: 100%;
+  max-width: 1640px;
+  margin: auto;
   @media screen and (max-width: 767px) {
-    padding: 16rem 2rem 3rem 2rem;
+    padding: 3rem 2rem 3rem 2rem;
   }
   @media screen and (max-width: 500px) {
-    padding: 16rem .75rem 3rem .75rem;
+    padding: 3rem .75rem 3rem .75rem;
   }
 `
 

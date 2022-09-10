@@ -10,3 +10,17 @@ export const GoIn = {
     }
 }
 
+export const arrowRotate = {
+    on: {rotate: '180deg'},
+    off: {rotate: '0'}
+}
+
+export const moveArrow = {
+    false: {y: 10},
+    active: {
+        y: 10,
+        transition: {
+            delay: 5
+        }
+    }
+}

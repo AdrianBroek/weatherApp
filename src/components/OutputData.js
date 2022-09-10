@@ -5,7 +5,18 @@ import styled from 'styled-components';
 import StateContext from './StateContext';
 import Slider from './Slider'
 import More from './More';
-import {AnimateSharedLayout} from 'framer-motion'
+import {AnimateSharedLayout, motion} from 'framer-motion'
+// icons
+import rain from '../images/icons/cloudy.png'
+import wind from '../images/icons/wind.png'
+import thermometer from '../images/icons/thermometer.png'
+import tornado from '../images/icons/tornado.png'
+import uv from '../images/icons/uv.png'
+import humidity from '../images/icons/humidityy.png'
+import cloud from '../images/icons/cloud.png'
+import arrow from '../images/icons/down-arrow.png'
+// animations
+import {arrowRotate, moveArrow} from '../animation'
 
 
 const OutputData = () => {
@@ -40,6 +51,8 @@ const OutputData = () => {
     const [width, setWidth] = useState(0);
     const [height, setHeight] = useState(0);
 
+    const [arrows, setArrow] = useState(false)
+
     useLayoutEffect(() => {
         setWidth(ref.current.clientWidth);
         // setHeight(ref.current.offsetHeight);
@@ -73,11 +86,28 @@ const OutputData = () => {
         <h1 style={{
             textShadow: '0px 4px 3px rgba(0,0,0,0.4),0px 8px 13px rgba(0,0,0,0.1),0px 18px 23px rgba(0,0,0,0.1)'
         }}>WeatherApp </h1>
+      
+        {/* map */}
         {lat && lon && (
             <MapComp center={coords} zoom={11}/>
         )}
 
+        {/* pick day */}
+        <DayInfoContainer>
+        {loaded && forecast.forecastday.map((item,index)=> (
+            <DayInfo 
+                astro={item.astro}
+                date={item.date}
+                day={item.day}
+                hour={item.hour}
+                key={index}
+                days={forecast.forecastday}
+                index={index}
+            />
+        ))}
+        </DayInfoContainer> 
 
+        {/* now date */}
         {loaded && (
             <CurrentInfo>
                 <div className='current-data'>
@@ -95,25 +125,7 @@ const OutputData = () => {
             </CurrentInfo>
         )}
 
-        {totalData && (
-                <MoreSection>
-                <h2 onClick={() => setToggle(!toggle)}>More</h2>
-                <AnimateSharedLayout>
-                    <More className='details' toggle={toggle} setToggle={setToggle}>
-                        <div>Chance of rain: {totalData.chance_of_rain} </div>
-                        <div>Cloud: {totalData.cloud}% </div>
-                        <div>Feels like temp: {totalData.feelslike_c} </div>
-                        <div>Gust : {totalData.gust_kph} </div>
-                        <div>Humidity : {totalData.humidity} </div>
-                        <div>UV : {totalData.uv} </div>
-                        <div>Wind direction : {totalData.wind_dir} </div>
-                    </More>
-                </AnimateSharedLayout>
-                <div className='line'></div>
-            </MoreSection>
-        )}
-
-
+        {/* hour slider */}
         <SliderContainer
         className={loaded ? 'active' : ''}
         ref={ref}>
@@ -135,19 +147,79 @@ const OutputData = () => {
         </div> 
         </SliderContainer>
 
-        <DayInfoContainer>
-        {loaded && forecast.forecastday.map((item,index)=> (
-            <DayInfo 
-            astro={item.astro}
-            date={item.date}
-            day={item.day}
-            hour={item.hour}
-            key={index}
-            days={forecast.forecastday}
-            index={index}
-            />
-            ))}
-        </DayInfoContainer> 
+        {/* more section */}
+        {totalData && (
+                <MoreSection>
+                <motion.h2
+                    onClick={() => setToggle(!toggle)}
+                    whileTap={{scale: .9}}
+                    whileHover={()=>setArrow(true)}
+                >
+                    More
+                </motion.h2>
+                
+                <motion.div
+                    variants={arrowRotate}
+                    initial="off"
+                    animate={toggle ? 'on' : 'off'}
+                    className="arrowContainer">
+                        <img className='fst' src={arrow}/>
+                        <motion.img
+                        variants={moveArrow}
+                        initial='false'
+                        animate={toggle ? 'active' : 'false'}
+                        className={toggle ? 'sec on' : 'sec'} src={arrow}/>
+                        <img className={toggle ? 'th on' : 'th'} src={arrow}/>
+                </motion.div>
+                <AnimateSharedLayout>
+                    <More className='details' toggle={toggle} setToggle={setToggle}>
+                        <div class="detail">
+                            <p>Chance of rain: {totalData.chance_of_rain}</p>
+                            <div className="iconContainer">
+                                <img src={rain} />
+                            </div>
+                        </div>
+                        <div class="detail">
+                            <p>Cloud: {totalData.cloud}%</p>
+                            <div className="iconContainer">
+                                <img src={cloud} />
+                            </div>
+                            </div>
+                        <div class="detail">
+                            <p>Feels like temp: {totalData.feelslike_c}</p> 
+                            <div className="iconContainer">
+                                <img src={thermometer} />
+                            </div>
+                            </div>
+                        <div class="detail">
+                            <p>Gust : {totalData.gust_kph}</p> 
+                            <div className="iconContainer">
+                                <img src={tornado} />
+                            </div>
+                            </div>
+                        <div class="detail">
+                            <p>Humidity : {totalData.humidity} </p>
+                            <div className="iconContainer">
+                                <img src={humidity} />
+                            </div>
+                            </div>
+                        <div class="detail">
+                            <p>UV : {totalData.uv} </p>
+                            <div className="iconContainer">
+                                <img src={uv} />
+                            </div>
+                            </div>
+                        <div class="detail">
+                            <p>Wind direction : {totalData.wind_dir} </p>
+                            <div className="iconContainer">
+                                <img src={wind} />
+                            </div>
+                            </div>
+                    </More>
+                </AnimateSharedLayout>
+            </MoreSection>
+        )}
+
     </>
     )
 }
@@ -175,13 +247,78 @@ const MoreSection = styled.section`
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row: 2;
+    row-gap: 2rem;
+    row-gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    padding: 3rem 0;
+    .arrowContainer {
+        width: 50px;
+        height: 50px;
+        margin: auto;
+        position: relative;
+        img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            max-width: 100%;
+            max-height: 100%;
+            &.sec {
+                top: 12px;
+                /* filter: invert(58%) sepia(81%) saturate(587%) hue-rotate(179deg) brightness(100%) contrast(82%); */
+            }
+            &.th {
+                top: 25px;
+                filter: invert(89%) sepia(10%) saturate(1747%) hue-rotate(73deg) brightness(99%) contrast(87%);
+            }
+            &.on {
+                top: 0px;
+               } 
+        }
+    }
+    h2 {
+        border: 1px solid transparent;
+        padding: 1.2rem;
+        width: 150px;
+        margin: auto;
+        background: rgba(0,0,0,.4);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+        backdrop-filter: blur(12.1px);
+        -webkit-backdrop-filter: blur(12.1px);
+        &:hover {
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+    }
     .details {
-        grid-template-columns: repeat(auto-fill, [col-start] 250px [col-end]);
+        width: 100%;
+        grid-template-columns: repeat(auto-fill, [col-start] 241px [col-end]);
         display: grid;
         align-items: center;
-        justify-content: center;
-        div {
-            padding: 1rem;
+        justify-content: flex-start;
+        row-gap: 2rem;
+        column-gap: 1.2rem;
+        .detail {
+            padding: 3rem;
+            background: rgba(0,0,0,.4);
+            border-radius: 16px;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(12.1px);
+            -webkit-backdrop-filter: blur(12.1px);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            p{
+                max-width: 85px;
+            }
+            .iconContainer {
+                width: 50px;
+                height: auto;
+                img {
+                    max-width: 100%;
+                    max-height: 100%;
+                }
+            }
         }
     }
     h2 {
@@ -193,12 +330,6 @@ const MoreSection = styled.section`
         -moz-user-select: none; /* Old versions of Firefox */
         -ms-user-select: none; /* Internet Explorer/Edge */
         user-select: none;
-    }
-    .line {
-        background: #e15d44;
-        height: 1px;
-        margin: 2rem 0;
-        width: 100%;
     }
 `
 

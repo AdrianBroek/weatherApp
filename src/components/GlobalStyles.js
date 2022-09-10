@@ -19,17 +19,17 @@ const GlobalStyles = createGlobalStyle`
         transition: background-image 0.2s ease-in-out;
     }
     .map {
-        position: absolute;
-        top: 0;
-        left: 0;
         height: 200px;
-        width: 100vh;
+        width: 100%;
         z-index: -1;
         filter: brightness(0.5);
+        border-radius: 0.5rem;
+        overflow: hidden;
+        margin: 3rem 0;
     }
     .leaflet-container {
-        width: 100vw;
-        height: 350px;
+        width: 100%;
+        height: 100%;
         z-index: 1;
         .leaflet-control-container {
             display: none;
