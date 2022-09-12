@@ -16,7 +16,7 @@ import humidity from '../images/icons/humidityy.png'
 import cloud from '../images/icons/cloud.png'
 import arrow from '../images/icons/down-arrow.png'
 // animations
-import {arrowRotate, moveArrow} from '../animation'
+import {arrowRotate, moveArrow1, moveArrow2} from '../animation'
 
 
 const OutputData = () => {
@@ -52,6 +52,7 @@ const OutputData = () => {
     const [height, setHeight] = useState(0);
 
     const [arrows, setArrow] = useState(false)
+    const [move, setMove] = useState(false)
 
     useLayoutEffect(() => {
         setWidth(ref.current.clientWidth);
@@ -153,7 +154,7 @@ const OutputData = () => {
                 <motion.h2
                     onClick={() => setToggle(!toggle)}
                     whileTap={{scale: .9}}
-                    whileHover={()=>setArrow(true)}
+                    whileHover={() => setMove(true)}
                 >
                     More
                 </motion.h2>
@@ -163,13 +164,9 @@ const OutputData = () => {
                     initial="off"
                     animate={toggle ? 'on' : 'off'}
                     className="arrowContainer">
-                        <img className='fst' src={arrow}/>
-                        <motion.img
-                        variants={moveArrow}
-                        initial='false'
-                        animate={toggle ? 'active' : 'false'}
-                        className={toggle ? 'sec on' : 'sec'} src={arrow}/>
-                        <img className={toggle ? 'th on' : 'th'} src={arrow}/>
+                            <motion.img className='fst' src={arrow}/>
+                            <motion.img variants={moveArrow1} initial='stay' animate='move' className={toggle ? 'sec off' : 'sec'} src={arrow}/>
+                            <motion.img variants={moveArrow2} initial='stay' animate='move' className={toggle ? 'th off' : 'th'} src={arrow}/>
                 </motion.div>
                 <AnimateSharedLayout>
                     <More className='details' toggle={toggle} setToggle={setToggle}>
@@ -241,6 +238,20 @@ const CurrentInfo = styled.section`
         display: flex;
         align-items: center;
     }
+    @media screen and (max-width: 501px){
+        .current-data,
+        .current-weather {
+            h1 {
+                font-size: 6vw;
+                display: flex;
+                flex-direction: column;
+                span {
+                    font-size: .65rem;
+                }
+            }
+
+        }
+    }
 `
 
 const MoreSection = styled.section`
@@ -252,6 +263,7 @@ const MoreSection = styled.section`
     display: flex;
     flex-direction: column;
     padding: 3rem 0;
+    position: relative;
     .arrowContainer {
         width: 50px;
         height: 50px;
@@ -264,14 +276,13 @@ const MoreSection = styled.section`
             max-width: 100%;
             max-height: 100%;
             &.sec {
-                top: 12px;
-                /* filter: invert(58%) sepia(81%) saturate(587%) hue-rotate(179deg) brightness(100%) contrast(82%); */
+                /* top: 12px; */
             }
             &.th {
-                top: 25px;
+                /* top: 25px; */
                 filter: invert(89%) sepia(10%) saturate(1747%) hue-rotate(73deg) brightness(99%) contrast(87%);
             }
-            &.on {
+            &.off {
                 top: 0px;
                } 
         }
@@ -291,6 +302,8 @@ const MoreSection = styled.section`
         }
     }
     .details {
+        position: absolute;
+        top: 100%;
         width: 100%;
         grid-template-columns: repeat(auto-fill, [col-start] 241px [col-end]);
         display: grid;
@@ -298,6 +311,11 @@ const MoreSection = styled.section`
         justify-content: flex-start;
         row-gap: 2rem;
         column-gap: 1.2rem;
+        @media screen and (max-width: 601px){
+            grid-template-columns: 45% 45%;
+            column-gap: 0;
+            justify-content: space-around;
+        }
         .detail {
             padding: 3rem;
             background: rgba(0,0,0,.4);
@@ -317,6 +335,18 @@ const MoreSection = styled.section`
                 img {
                     max-width: 100%;
                     max-height: 100%;
+                }
+            }
+            @media screen and (max-width: 601px){
+                padding: 1rem;
+            }
+            @media screen and (max-width: 450px){
+                padding: .85rem;
+                p{
+                    font-size: 4vw;
+                }
+                .iconContainer {
+                    max-width: 35px;
                 }
             }
         }

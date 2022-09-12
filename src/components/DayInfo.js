@@ -32,7 +32,7 @@ const DayInfo = ({date, astro, day, hour, index}) => {
 
     const dayHandler = (ind, dateStr, locale) => {
         if ( ind == 0) {
-            return getDayName(dateStr, locale) + ' (' + 'Today' + ')'
+            return getDayName(dateStr, locale)
         } else if (ind == 1){
             return getDayName(dateStr, locale)
         }else {
@@ -64,13 +64,13 @@ const DayInfo = ({date, astro, day, hour, index}) => {
                 <>
                 <h2>{dayHandler(index, hourData.time.substring(0, hourData.time.indexOf(' ')),"en-US")}</h2>
                 <div>
-                    Date: {hourData.time.substring(0, hourData.time.indexOf(' '))}
+                    <p>{hourData.time.substring(0, hourData.time.indexOf(' '))}</p>
                 </div>
                 <div className="cloudy">
                     <h2>{forecast.forecastday[index].day.avgtemp_c}C°</h2>
                     <div className="cloudyItems">
                         <img src={forecast.forecastday[index].day.condition.icon} />
-                        {forecast.forecastday[index].day.condition.text}
+                        <p>{forecast.forecastday[index].day.condition.text}</p>
                     </div>
                 </div>
                 </>
@@ -99,11 +99,25 @@ const DayInfoContainer = styled.section`
         .cloudyItems {
             display: flex;
             justify-content: flex-start;
+            align-items: center;
+            flex-wrap: wrap;
         }
     }
     &.active {
         border: 1px solid rgba(255, 255, 255, 0.3);
     }
+    @media screen and (max-width: 501px){
+        h2 {
+            font-size: 4vw;
+        }
+        p {
+            font-size: 3vw;
+        }
+        img {
+            max-width: 100%;
+        }
+    }
+
 `
 
 export default DayInfo

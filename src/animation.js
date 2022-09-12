@@ -12,15 +12,35 @@ export const GoIn = {
 
 export const arrowRotate = {
     on: {rotate: '180deg'},
-    off: {rotate: '0'}
+    off: {rotate: '0'},
+    
 }
 
-export const moveArrow = {
-    false: {y: 10},
-    active: {
-        y: 10,
+export const moveArrow1 = {
+    stay: {y: 0},
+    move: {
+        y: 12,
         transition: {
-            delay: 5
+            duration: .3,
+            repeat: Infinity,
+            repeat: Infinity,
+            repeatDelay: 6,
+            ease: 'easeInOut',
         }
     }
 }
+
+export const moveArrow2 = {
+    stay: {y: 0},
+    move: {
+        y: 25,
+        transition: {
+            duration: .3,
+            repeat: Infinity,
+            repeatDelay: 6,
+            ease: 'easeInOut',
+        }
+    }
+}
+
+
