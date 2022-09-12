@@ -51,12 +51,8 @@ const Container = styled.div`
     grid-column-start: 1;
     grid-column-end: 4;
     grid-row: 1;
-    /* position: absolute;
-    top: 0;
-    left: 0; */
     .elContainer {
         display: grid;
-        /* grid-template-columns: repeat(1, 20px); */
         place-items: end center;
         width: calc(100%/24);
     }

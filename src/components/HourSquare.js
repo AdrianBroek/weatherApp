@@ -23,7 +23,7 @@ const HourSquareStyle = styled.div`
     cursor: pointer;
     position: relative;
     &:hover {
-            background: #8f70d1;
+            background: #164c6b;
         }
     p {
         color: white;

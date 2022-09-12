@@ -85,6 +85,7 @@ const OutputData = () => {
     return (
         <>
         <h1 style={{
+            marginTop: '.5rem',
             textShadow: '0px 4px 3px rgba(0,0,0,0.4),0px 8px 13px rgba(0,0,0,0.1),0px 18px 23px rgba(0,0,0,0.1)'
         }}>WeatherApp </h1>
       
@@ -114,7 +115,7 @@ const OutputData = () => {
                 <div className='current-data'>
                     <h1><span>City:</span> {location.name} </h1>
                     <h1><span>Country:</span> {location.country} </h1>
-                    <h1><span>Local-time:</span> {totalData ? totalData.time : location.localtime} </h1>
+                    <h1><span>Time:</span> {totalData ? totalData.time.substring(11) : location.localtime} </h1>
                 </div>
                 <div className='current-weather'>
                     <h1><span>Temperature:</span> {totalData ? totalData.temp_c : current.temp_c} C°</h1>
@@ -154,7 +155,6 @@ const OutputData = () => {
                 <motion.h2
                     onClick={() => setToggle(!toggle)}
                     whileTap={{scale: .9}}
-                    whileHover={() => setMove(true)}
                 >
                     More
                 </motion.h2>
@@ -165,8 +165,8 @@ const OutputData = () => {
                     animate={toggle ? 'on' : 'off'}
                     className="arrowContainer">
                             <motion.img className='fst' src={arrow}/>
-                            <motion.img variants={moveArrow1} initial='stay' animate='move' className={toggle ? 'sec off' : 'sec'} src={arrow}/>
-                            <motion.img variants={moveArrow2} initial='stay' animate='move' className={toggle ? 'th off' : 'th'} src={arrow}/>
+                            <img className={toggle ? 'sec off' : 'sec'} src={arrow}/>
+                            <img className={toggle ? 'th off' : 'th'} src={arrow}/>
                 </motion.div>
                 <AnimateSharedLayout>
                     <More className='details' toggle={toggle} setToggle={setToggle}>
@@ -265,8 +265,8 @@ const MoreSection = styled.section`
     padding: 3rem 0;
     position: relative;
     .arrowContainer {
-        width: 50px;
-        height: 50px;
+        width: 30px;
+        height: 30px;
         margin: auto;
         position: relative;
         img {
@@ -275,16 +275,18 @@ const MoreSection = styled.section`
             left: 0;
             max-width: 100%;
             max-height: 100%;
+            transition: all .3s ease;
             &.sec {
-                /* top: 12px; */
+                top: 12px;
             }
             &.th {
-                /* top: 25px; */
+                
+                top: 25px;
                 filter: invert(89%) sepia(10%) saturate(1747%) hue-rotate(73deg) brightness(99%) contrast(87%);
             }
             &.off {
                 top: 0px;
-               } 
+            } 
         }
     }
     h2 {
@@ -311,6 +313,7 @@ const MoreSection = styled.section`
         justify-content: flex-start;
         row-gap: 2rem;
         column-gap: 1.2rem;
+        padding-bottom: 1rem;
         @media screen and (max-width: 601px){
             grid-template-columns: 45% 45%;
             column-gap: 0;

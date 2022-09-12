@@ -141,7 +141,7 @@ const SearchResults = styled.div`
         font-weight: 400;
         cursor: pointer;
         &:hover {
-            background: RGB(225, 93, 68);
+            background: #2994D1;
             color: #fff;
         }
     }
