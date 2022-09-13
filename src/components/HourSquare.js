@@ -9,7 +9,6 @@ const HourSquare = ({el, id, temperature}) => {
         >
         <p className="temp">{id % 2 ? temperature : ''}</p>
         <p className="time">{id % 2 ? el.time.substring(11) : ''}</p>
-
         </HourSquareStyle>
     )
 }
