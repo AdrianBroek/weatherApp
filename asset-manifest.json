@@ -1,25 +1,22 @@
 {
   "files": {
-    "main.css": "/weatherApp/static/css/main.849afed2.css",
-    "main.js": "/weatherApp/static/js/main.07b5eee3.js",
-    "static/js/787.d9312eb8.chunk.js": "/weatherApp/static/js/787.d9312eb8.chunk.js",
-    "static/media/sunweather.jpg": "/weatherApp/static/media/sunweather.5c52ed3f061bd9bf0375.jpg",
-    "static/media/s.jpg": "/weatherApp/static/media/s.934a57b9bcddb3cf36a0.jpg",
-    "static/media/rain.jpg": "/weatherApp/static/media/rain.a174557aa80b00a68349.jpg",
-    "static/media/thermometer.png": "/weatherApp/static/media/thermometer.39459b7d9abdc4a00d3d.png",
-    "static/media/cloudy.png": "/weatherApp/static/media/cloudy.53b433764e31ba6e43ac.png",
-    "static/media/humidityy.png": "/weatherApp/static/media/humidityy.3743fba4ba6859f095f3.png",
-    "static/media/tornado.png": "/weatherApp/static/media/tornado.75ec7262d44c06ab43f8.png",
-    "static/media/uv.png": "/weatherApp/static/media/uv.935a590ec420a876e3f3.png",
-    "static/media/wind.png": "/weatherApp/static/media/wind.85e791bec97b55cdd92f.png",
-    "static/media/cloud.png": "/weatherApp/static/media/cloud.ed5d44ca54cceb83f45e.png",
-    "index.html": "/weatherApp/index.html",
-    "main.849afed2.css.map": "/weatherApp/static/css/main.849afed2.css.map",
-    "main.07b5eee3.js.map": "/weatherApp/static/js/main.07b5eee3.js.map",
-    "787.d9312eb8.chunk.js.map": "/weatherApp/static/js/787.d9312eb8.chunk.js.map"
+    "main.css": "./static/css/main.849afed2.css",
+    "main.js": "./static/js/main.e0420d45.js",
+    "static/js/787.d9312eb8.chunk.js": "./static/js/787.d9312eb8.chunk.js",
+    "static/media/thermometer.png": "./static/media/thermometer.39459b7d9abdc4a00d3d.png",
+    "static/media/cloudy.png": "./static/media/cloudy.53b433764e31ba6e43ac.png",
+    "static/media/humidityy.png": "./static/media/humidityy.3743fba4ba6859f095f3.png",
+    "static/media/tornado.png": "./static/media/tornado.75ec7262d44c06ab43f8.png",
+    "static/media/uv.png": "./static/media/uv.935a590ec420a876e3f3.png",
+    "static/media/wind.png": "./static/media/wind.85e791bec97b55cdd92f.png",
+    "static/media/cloud.png": "./static/media/cloud.ed5d44ca54cceb83f45e.png",
+    "index.html": "./index.html",
+    "main.849afed2.css.map": "./static/css/main.849afed2.css.map",
+    "main.e0420d45.js.map": "./static/js/main.e0420d45.js.map",
+    "787.d9312eb8.chunk.js.map": "./static/js/787.d9312eb8.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.849afed2.css",
-    "static/js/main.07b5eee3.js"
+    "static/js/main.e0420d45.js"
   ]
 }
