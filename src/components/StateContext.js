@@ -12,7 +12,7 @@ export function StateProvider({children}){
     const [lon, setLon] = useState('')
     const api_key = process.env.REACT_APP_API_KEY
     const [astro, setAstro] = useState('')
-
+    const [active, setActive] = useState('')
 
     // info about clicked day_hour
     const [activeindex, setActiveindex] = useState(0)
@@ -28,6 +28,8 @@ export function StateProvider({children}){
         <StateContext.Provider value={{
             totalData,
             setTotalData,
+            active,
+            setActive,
             activeIndexTable,
             setActiveIndexTable,
             loaded,

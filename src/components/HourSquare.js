@@ -15,7 +15,7 @@ const HourSquare = ({el, id, temperature}) => {
 
 const HourSquareStyle = styled.div`
     width: 100%;
-    background-color: #2994d1;
+    background-color: #2993d183;
     border-top: 1px dashed #092230;
     height: 20px;
     text-align: center;

@@ -13,31 +13,22 @@ const SearchInput = () => {
     const [text, setText] = useState('')
     const [searchresult, setSearchresult] = useState()
 
-    const { 
-        current, 
-        setCurrent,
-        forecast,
-        setForecast,
-        location,
-        setLocation,
-        city, 
+    const {  
         setCity, 
-        lat, 
-        setLat, 
-        lon, 
-        setLon,
         api_key,
-        astro,
-        setAstro,
-        setLoaded
+        active,
+        setActive
     } = useContext(StateContext)
+
+    
+    useEffect(()=> {
+        setSearchresult()
+    }, [active])
 
     useEffect(() => {
         axios.get(`https://api.weatherapi.com/v1/search.json?key=${api_key}&q=${text}`)
         .then((data)=> {
-
             setSearchresult(data.data)
-            // console.log(searchresult)
         })
         .catch(er => new Error(er))
     },[text])
@@ -54,7 +45,7 @@ const SearchInput = () => {
         setText(e.target.innerText)
         // timeout cause of state bugging 
         // (i tried couple of things from the internet but failed, 
-        // so i comed up with this, and it kinda works)
+        // so i comed up with this tricky solution, and it kinda works)
         setTimeout(()=>{
             setSearchresult(false)
         },[100])
@@ -69,14 +60,14 @@ const SearchInput = () => {
             setSearchresult(false)
         }  
     }
-    console.log(searchresult)
+
     const btnHandler = () => {
         setCity(text)
         setSearchresult(false)
     }
 
     return (
-        <SearchBar>
+        <SearchBar onClick={()=> setActive(true)}>
             <input value={text} placeholder='Insert city name' onKeyDown={handleKeyDown} onChange={changeTxt} />
             <button onClick={()=> btnHandler()}>
             <FontAwesomeIcon icon={faSearchLocation} />
@@ -98,6 +89,7 @@ const SearchBar = styled.section`
     position: relative;
     border-radius: 0.5rem;
     box-shadow: -1px 5px 6px rgba(0,0,0, .3);
+    position: relative;
     input {
         width: 100%;
         border: 0;
@@ -120,6 +112,17 @@ const SearchBar = styled.section`
             width: 100%;
             height: 50%;
         }
+    }
+    .overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        background-color: transparent;
+        height: 100%;
+        width: 100%;
+        /* &.open {
+            background-color: #3a38386e;
+        } */
     }
 `
 

@@ -181,37 +181,37 @@ const OutputData = () => {
                             <div className="iconContainer">
                                 <img src={cloud} />
                             </div>
-                            </div>
+                        </div>
                         <div class="detail">
                             <p>Feels like temp: {totalData.feelslike_c}</p> 
                             <div className="iconContainer">
                                 <img src={thermometer} />
                             </div>
-                            </div>
+                        </div>
                         <div class="detail">
                             <p>Gust : {totalData.gust_kph}</p> 
                             <div className="iconContainer">
                                 <img src={tornado} />
                             </div>
-                            </div>
+                        </div>
                         <div class="detail">
                             <p>Humidity : {totalData.humidity} </p>
                             <div className="iconContainer">
                                 <img src={humidity} />
                             </div>
-                            </div>
+                        </div>
                         <div class="detail">
                             <p>UV : {totalData.uv} </p>
                             <div className="iconContainer">
                                 <img src={uv} />
                             </div>
-                            </div>
+                        </div>
                         <div class="detail">
                             <p>Wind direction : {totalData.wind_dir} </p>
                             <div className="iconContainer">
                                 <img src={wind} />
                             </div>
-                            </div>
+                        </div>
                     </More>
                 </AnimateSharedLayout>
             </MoreSection>
@@ -304,9 +304,9 @@ const MoreSection = styled.section`
         }
     }
     .details {
-        position: absolute;
+        /* position: absolute;
         top: 100%;
-        width: 100%;
+        width: 100%; */
         grid-template-columns: repeat(auto-fill, [col-start] 241px [col-end]);
         display: grid;
         align-items: center;

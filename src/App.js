@@ -3,6 +3,7 @@ import GetWeather from './components/GetWeather'
 import OutputData from './components/OutputData'
 import SearchInput from './components/SearchInput'
 import { StateProvider } from './components/StateContext';
+import Overlay from "./components/Overlay";
 // global styles
 import GlobalStyles from './components/GlobalStyles';
 // style
@@ -17,6 +18,7 @@ function App() {
       <StateProvider>
         <GetWeather />
         <SearchInput />
+        <Overlay />
         <OutputData />
       </StateProvider>
     </Container>
