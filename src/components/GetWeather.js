@@ -6,22 +6,13 @@ import StateContext from './StateContext'
 const GetWeather = () => {
 
     const { 
-        totalData,
-        setTotalData,
-        current, 
         setCurrent,
-        forecast,
         setForecast,
-        location,
         setLocation,
         city, 
-        setCity, 
-        lat, 
         setLat, 
-        lon, 
         setLon,
         api_key,
-        astro,
         setAstro,
         setLoaded,
     } = useContext(StateContext)

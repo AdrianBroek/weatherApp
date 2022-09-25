@@ -1,12 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-
 import StateContext from './StateContext';
-
-
-import sunWeather from '../images/sunweather.jpg'
-import rain from '../images/rain.jpg'
-
-import s from '../images/s.jpg'
 // style
 import styled from "styled-components";
 
@@ -15,12 +8,9 @@ const DayInfo = ({date, astro, day, hour, index}) => {
         forecast,
         activeindex,
         setActiveindex,
-        setCurrent,
-        totalData,
         setTotalData
         } = useContext(StateContext)
     const [hourData, setHourData] = useState(hour[0])
-    const [slideValue, setSlideValue] = useState(0)
 
     const getDayName = (dateStr, locale) => {
         var date = new Date(dateStr);
@@ -28,7 +18,6 @@ const DayInfo = ({date, astro, day, hour, index}) => {
     }
 
     var dateStr = '05-232014';
-    var day = getDayName(dateStr, "nl-NL"); // Gives back 'Vrijdag' which is Dutch for Friday.
 
     const dayHandler = (ind, dateStr, locale) => {
         if ( ind == 0) {
@@ -44,18 +33,16 @@ const DayInfo = ({date, astro, day, hour, index}) => {
     const updateData = () => {
         setActiveindex(index)
         if (index == 0) {
-            setTotalData(hourData[hours])
+            setTotalData(hourData)
         }else {
             setTotalData(hourData)
         }
     }
     
     let timestamp = new Date();
-    let hours = timestamp.getHours()
-    let minutes = timestamp.getMinutes()
-    
-    // document.body.style.backgroundImage = `url('${s}')`;
-    // console.log(forecast)
+    // let hours = timestamp.getHours()
+    // let minutes = timestamp.getMinutes()
+
     return (
         <DayInfoContainer className={activeindex == index ? 'active' : ''}
         onClick={()=>updateData()}>
@@ -86,12 +73,10 @@ const DayInfoContainer = styled.section`
     border-radius: .5rem;
     grid-row: 2;
     cursor: pointer;
-    /* From https://css.glass */
     background: rgba(0,0,0,.4);
     border-radius: 16px;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.15);
-    backdrop-filter: blur(12.1px);
-    -webkit-backdrop-filter: blur(12.1px);
+    transition: all .12s ease;
     .cloudy {
         span {
             font-size: .95rem;
@@ -104,7 +89,13 @@ const DayInfoContainer = styled.section`
         }
     }
     &.active {
-        border: 1px solid rgba(255, 255, 255, 0.3);
+        border: 1px solid rgba(255, 255, 255, 0.651);
+        &:hover {
+            border: 1px solid rgba(255, 255, 255, 0.651);
+    }
+    }
+    &:hover {
+        border: 1px solid rgba(255, 255, 255, 0.158);
     }
     @media screen and (max-width: 501px){
         h2 {

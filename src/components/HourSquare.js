@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 const HourSquare = ({el, id, temperature}) => {
-    // console.log(id % 2)
+
     return (
         <HourSquareStyle 
         style={{height: temperature*5}}
@@ -15,14 +15,15 @@ const HourSquare = ({el, id, temperature}) => {
 
 const HourSquareStyle = styled.div`
     width: 100%;
-    background-color: #2993d183;
-    border-top: 1px dashed #092230;
+    background-color: hsla(145, 67%, 49%, 0.281);
+    border-top: 1px dashed #29d16fff;
     height: 20px;
     text-align: center;
     cursor: pointer;
     position: relative;
+    transition: all .12s ease;
     &:hover {
-            background: #164c6b;
+            background: #29d16fff;
         }
     p {
         color: white;

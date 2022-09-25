@@ -3,14 +3,9 @@ import styled from "styled-components";
 import StateContext from './StateContext';
 import HourSquare from "./HourSquare";
 
-const Slider = ({date, astro, day, hour, index, width}) => {
+const Slider = ({hour, index, width}) => {
     const { 
         setTotalData,
-        totalData,
-        forecast,
-        activeindex,
-        setTemperature,
-        activeIndexTable,
         setActiveIndexTable,
         } = useContext(StateContext)
     const [hourData, setHourData] = useState(hour[0])
@@ -19,7 +14,6 @@ const Slider = ({date, astro, day, hour, index, width}) => {
         // setTotalData(hourData)
         setHourData(hour[ind])
         setActiveIndexTable(index)
-   
     }
 
     // update totalData everytime hourdata changes
@@ -27,12 +21,10 @@ const Slider = ({date, astro, day, hour, index, width}) => {
         setTotalData(hourData)
     }, [hourData])
 
-
-
     return (
         <Container style={{width: width}}>
             {hour.map((el, ind)=> (
-                <div key={ind} className="elContainer" onClick={()=>hourChanger(ind)}>
+                <div key={ind} className="slCont" onClick={()=>hourChanger(ind)}>
                 <HourSquare 
                     el={el}
                     id={ind}
@@ -51,7 +43,7 @@ const Container = styled.div`
     grid-column-start: 1;
     grid-column-end: 4;
     grid-row: 1;
-    .elContainer {
+    .slCont {
         display: grid;
         place-items: end center;
         width: calc(100%/24);

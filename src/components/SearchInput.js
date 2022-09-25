@@ -113,17 +113,6 @@ const SearchBar = styled.section`
             height: 50%;
         }
     }
-    .overlay {
-        position: fixed;
-        top: 0;
-        left: 0;
-        background-color: transparent;
-        height: 100%;
-        width: 100%;
-        /* &.open {
-            background-color: #3a38386e;
-        } */
-    }
 `
 
 const SearchResults = styled.div`

@@ -16,57 +16,34 @@ import humidity from '../images/icons/humidityy.png'
 import cloud from '../images/icons/cloud.png'
 import arrow from '../images/icons/down-arrow.png'
 // animations
-import {arrowRotate, moveArrow1, moveArrow2} from '../animation'
+import {arrowRotate} from '../animation'
 
 
 const OutputData = () => {
     const [toggle, setToggle] = useState(false)
     const ref = useRef(null);
-    const [text, setText] = useState([])
     const { 
-        setTotalData,
         totalData,
         current, 
-        setCurrent,
         forecast,
-        setForecast,
-        location,
-        setLocation,
-        city, 
-        setCity, 
+        location, 
         lat, 
-        setLat, 
         lon, 
-        setLon,
-        api_key,
-        astro,
-        setAstro,
         loaded,
-        activeindex,
-        activeIndexTable,
-        setActiveIndexTable
+        activeindex
     } = useContext(StateContext)
-
-
     const [width, setWidth] = useState(0);
-    const [height, setHeight] = useState(0);
-
-    const [arrows, setArrow] = useState(false)
-    const [move, setMove] = useState(false)
 
     useLayoutEffect(() => {
         setWidth(ref.current.clientWidth);
-        // setHeight(ref.current.offsetHeight);
     }, []);
 
+    window.addEventListener('resize', () => {
+        console.log(window.innerWidth)
+        setWidth(ref.current.clientWidth);
+    })
+
     const coords = [lon, lat]
-
-    // index nastepnych dni pogody
-
-    // indeks tabelek
-    // console.log(activeIndexTable)
-    // wszystkie godziny data
-    // console.log(totalData)
 
     const [leftPos, setleftPos] = useState(0)
 
@@ -81,7 +58,6 @@ const OutputData = () => {
         }
     }, [activeindex])
 
-    // console.log(leftPos)
     return (
         <>
         <h1 style={{
@@ -115,7 +91,7 @@ const OutputData = () => {
                 <div className='current-data'>
                     <h1><span>City:</span> {location.name} </h1>
                     <h1><span>Country:</span> {location.country} </h1>
-                    <h1><span>Time:</span> {totalData ? totalData.time.substring(11) : location.localtime} </h1>
+                    <h1><span>Time:</span> {totalData ? totalData.time.substring(11) : location.localtime.substring(11)} </h1>
                 </div>
                 <div className='current-weather'>
                     <h1><span>Temperature:</span> {totalData ? totalData.temp_c : current.temp_c} C°</h1>
@@ -132,7 +108,7 @@ const OutputData = () => {
         className={loaded ? 'active' : ''}
         ref={ref}>
         <div
-        style={{left: leftPos, transition: '.35s ease-out'}}
+        style={{left: leftPos, transition: '.3s ease-in'}}
         className='parent'>    
         {loaded && forecast.forecastday.map((item,index)=> (
             <Slider 
@@ -156,9 +132,10 @@ const OutputData = () => {
                     onClick={() => setToggle(!toggle)}
                     whileTap={{scale: .9}}
                 >
-                    More
+                More
                 </motion.h2>
-                
+
+                {/* arrow */}
                 <motion.div
                     variants={arrowRotate}
                     initial="off"
@@ -170,43 +147,43 @@ const OutputData = () => {
                 </motion.div>
                 <AnimateSharedLayout>
                     <More className='details' toggle={toggle} setToggle={setToggle}>
-                        <div class="detail">
+                        <div className="detail">
                             <p>Chance of rain: {totalData.chance_of_rain}</p>
                             <div className="iconContainer">
                                 <img src={rain} />
                             </div>
                         </div>
-                        <div class="detail">
+                        <div className="detail">
                             <p>Cloud: {totalData.cloud}%</p>
                             <div className="iconContainer">
                                 <img src={cloud} />
                             </div>
                         </div>
-                        <div class="detail">
+                        <div className="detail">
                             <p>Feels like temp: {totalData.feelslike_c}</p> 
                             <div className="iconContainer">
                                 <img src={thermometer} />
                             </div>
                         </div>
-                        <div class="detail">
+                        <div className="detail">
                             <p>Gust : {totalData.gust_kph}</p> 
                             <div className="iconContainer">
                                 <img src={tornado} />
                             </div>
                         </div>
-                        <div class="detail">
+                        <div className="detail">
                             <p>Humidity : {totalData.humidity} </p>
                             <div className="iconContainer">
                                 <img src={humidity} />
                             </div>
                         </div>
-                        <div class="detail">
+                        <div className="detail">
                             <p>UV : {totalData.uv} </p>
                             <div className="iconContainer">
                                 <img src={uv} />
                             </div>
                         </div>
-                        <div class="detail">
+                        <div className="detail">
                             <p>Wind direction : {totalData.wind_dir} </p>
                             <div className="iconContainer">
                                 <img src={wind} />
