@@ -39,7 +39,6 @@ const OutputData = () => {
     }, []);
 
     window.addEventListener('resize', () => {
-        console.log(window.innerWidth)
         setWidth(ref.current.clientWidth);
     })
 
@@ -63,7 +62,7 @@ const OutputData = () => {
         <h1 style={{
             marginTop: '.5rem',
             textShadow: '0px 4px 3px rgba(0,0,0,0.4),0px 8px 13px rgba(0,0,0,0.1),0px 18px 23px rgba(0,0,0,0.1)'
-        }}>WeatherApp </h1>
+        }}>WeatherApp<span style={{display: 'block',fontSize: '10px'}}>   API thanks to: <a href="https://www.weatherapi.com/">weatherapi.com</a></span></h1>
       
         {/* map */}
         {lat && lon && (
