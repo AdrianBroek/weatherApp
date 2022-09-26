@@ -4,7 +4,7 @@ import styled from "styled-components";
 const HourSquare = ({el, id, temperature}) => {
 
     return (
-        <HourSquareStyle 
+        <HourSquareStyle
         style={{height: temperature*5}}
         >
         <p className="temp">{id % 2 ? temperature : ''}</p>

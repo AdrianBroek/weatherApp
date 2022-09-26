@@ -24,12 +24,16 @@ const Slider = ({hour, index, width}) => {
     return (
         <Container style={{width: width}}>
             {hour.map((el, ind)=> (
-                <div key={ind} className="slCont" onClick={()=>hourChanger(ind)}>
+                <div 
+                    key={ind} 
+                    className="slCont" 
+                    onClick={()=>hourChanger(ind)}
+                >
                 <HourSquare 
                     el={el}
                     id={ind}
                     temperature={el.temp_c}
-                    >
+                >
                 </HourSquare>
                 </div>
             ))

@@ -62,7 +62,7 @@ const OutputData = () => {
         <h1 style={{
             marginTop: '.5rem',
             textShadow: '0px 4px 3px rgba(0,0,0,0.4),0px 8px 13px rgba(0,0,0,0.1),0px 18px 23px rgba(0,0,0,0.1)'
-        }}>WeatherApp<span style={{display: 'block',fontSize: '10px'}}>   API thanks to: <a href="https://www.weatherapi.com/">weatherapi.com</a></span></h1>
+        }}>WeatherApp<span style={{display: 'block',fontSize: '10px'}}>   API from: <a href="https://www.weatherapi.com/">weatherapi.com</a></span></h1>
       
         {/* map */}
         {lat && lon && (
@@ -103,6 +103,7 @@ const OutputData = () => {
         )}
 
         {/* hour slider */}
+        <HourSlider>
         <SliderContainer
         className={loaded ? 'active' : ''}
         ref={ref}>
@@ -121,8 +122,19 @@ const OutputData = () => {
             width={width}
             />
         ))}
-        </div> 
+        </div>
+        
         </SliderContainer>
+        {loaded && (
+            <>
+            <div className="line fourth" style={{height: 200}}></div>
+            <div className="line third" style={{height: 150}}></div>
+            <div className="line second" style={{height: 100}}></div>
+            <div className="line first" style={{height: 50}}></div>        
+            </>
+        )}
+        
+        </HourSlider>
 
         {/* more section */}
         {totalData && (
@@ -349,6 +361,46 @@ const DayInfoContainer = styled.article`
     margin: 2rem 0;
 `
 
+const HourSlider = styled.section`
+    position: relative;
+    .line {
+        width: 100%;
+        border-top: 1px solid #ffffff0e;
+        position: absolute;
+        bottom: 0;
+        font-size: 10px;
+        pointer-events: none;
+        &.first, &.second, &.third, &.fourth {
+            &:before {
+                content: '10';
+                position: absolute;
+                top: -8px;
+                left: -15px;
+            }
+        }
+        &.first {
+            &:before {
+                content: '10';
+            }
+        }
+        &.second {
+            &:before {
+                content: '20';
+            }
+        }
+        &.third {
+            &:before {
+                content: '30';
+            }
+        }
+        &.fourth {
+            &:before {
+                content: '40';
+            }
+        }
+    }
+`
+
 const SliderContainer = styled.article`
     display: flex;
     width: 100%;
@@ -368,6 +420,7 @@ const SliderContainer = styled.article`
         top: 0;
         height: 100%;
     }
+    
 `   
 
 
