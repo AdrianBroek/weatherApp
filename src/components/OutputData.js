@@ -376,6 +376,9 @@ const HourSlider = styled.section`
                 position: absolute;
                 top: -8px;
                 left: -15px;
+                @media screen and (max-width: 501px){
+                    left: -12px;
+                }
             }
         }
         &.first {
