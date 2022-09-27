@@ -20,6 +20,7 @@ const GlobalStyles = createGlobalStyle`
         -webkit-transition: background-image 0.2s ease-in-out;
         transition: background-image 0.2s ease-in-out;
         height: 100%;
+        min-height: 100vh;
     }
     .map {
         height: 200px;
